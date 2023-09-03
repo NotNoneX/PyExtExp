@@ -12,7 +12,13 @@ from common.find_ext_path import find_ext_path
 from common.get_config import get_config
 from common.get_ext_info import get_ext_info
 
-logging.basicConfig(level=logging.INFO)
+logging.basicConfig(
+    level=logging.DEBUG,
+    format='[%(levelname)s] M%(module)s_L%(lineno)d:  %(message)s',
+    handlers=[
+        logging.StreamHandler()
+    ]
+)
 
 
 def create_crx():

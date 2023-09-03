@@ -19,7 +19,7 @@ def get_config() -> dict:
     config = configparser.ConfigParser()
     config.read(conf_path, encoding='utf8')
 
-    browser_type = config['Browser']['Type']
+    browser_type = config['Browser']['type']
     conf_dict = dict(config['Options'].items())
     conf_dict['browser_type'] = browser_type
     return conf_dict
