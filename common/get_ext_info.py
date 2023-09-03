@@ -69,7 +69,7 @@ def get_ext_info(ext_list: list or types.GeneratorType) -> types.GeneratorType:
 
                     version = info['version']
                 # 处理文件名中的特殊符号, 防止异常
-                rege_name = r'(\\+|\/+|\s+|:+)'
+                rege_name = r'[\\/:"*?<>|\s]+'
                 if re.search(rege_name, crx_name):
                     crx_name = re.sub(rege_name, '_', crx_name)
                 yield rel_path, crx_name, version
