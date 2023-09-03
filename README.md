@@ -28,9 +28,9 @@
 请修改config.ini配置文件用于本项目配置
 
 ```ini
-; Type: 指定浏览器类型, 如: chrome(暂只支持Chrome浏览器)
+; type: 指定浏览器类型, 如: chrome(暂只支持Chrome浏览器)
 [Browser]
-Type = Chrome
+type = Chrome
 
 ; extensions_dir: 配置浏览器扩展路径, 路径取至: Your\Browser\Path\...\Extensions
 ; 例如: 谷歌浏览器默认扩展路径: C:\Users\<YourUsername>\AppData\Local\Google\Chrome\User Data\Default\Extensions
@@ -38,8 +38,8 @@ Type = Chrome
 ; Crx_Path: 扩展文件保存路径
 [Options]
 extensions_dir = 你的浏览器扩展路径
-Pem_Path = 私钥文件保存路径
-Crx_Path = 扩展文件导出路径
+pem_path = 私钥文件保存路径
+crx_path = 扩展文件导出路径
 ```
 
 ### 示例用法：
