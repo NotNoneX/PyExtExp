@@ -42,20 +42,19 @@ def get_ext_info(ext_list: list or types.GeneratorType) -> types.GeneratorType:
                     logging.error(f'文件未找到错误: {e}')
                     crx_name = os.path.split(rel_path)[0].split(os.path.sep)[-1]
                 else:
-
-                    name = info['name']
-                    if '__MSG' in name:
+                    crx_name = info['name']
+                    if '__MSG' in crx_name:
                         regex = f'(?<=__MSG_).*(?=__)'
-                        # logging.info(rel_path)
-                        # logging.info(name)
-                        # 中文配置文件路径
+                        # 中英文文配置文件路径
                         zh_cfg_path = os.path.join(rel_path, '_locales', 'zh_CN', 'messages.json')
                         en_cfg_path = os.path.join(rel_path, '_locales', 'en', 'messages.json')
+                        config_path = ''
                         if os.path.exists(zh_cfg_path):
                             config_path = zh_cfg_path
                         else:
-                            config_path = en_cfg_path
-                        code_name = re.search(regex, name).group()
+                            if os.path.exists(en_cfg_path):
+                                config_path = en_cfg_path
+                        code_name = re.search(regex, crx_name).group()
                         try:
                             with open(config_path, 'r', encoding='utf8') as cfg_file:
                                 try:
@@ -67,8 +66,10 @@ def get_ext_info(ext_list: list or types.GeneratorType) -> types.GeneratorType:
                         else:
                             name = zh[code_name]['message']
                             crx_name = name
-                    else:
-                        crx_name = info['name']
-                    version = info['version']
 
+                    version = info['version']
+                # 处理文件名中的特殊符号, 防止异常
+                rege_name = r'(\\+|\/+|\s+|:+)'
+                if re.search(rege_name, crx_name):
+                    crx_name = re.sub(rege_name, '_', crx_name)
                 yield rel_path, crx_name, version
